@@ -17,6 +17,17 @@ var config = require('../config'); // get config file
 
 router.post('/gettoken', function(req, res) {
 
+    if (req.body.appId == undefined)
+    {
+        res.status(200).send("AppId is required!!!");
+        return;
+    }
+    if (req.body.secretKey == undefined)
+    {
+        res.status(200).send("SecretKey is required!!!");
+        return;
+    }
+
     ClientApp.findOne({ appId: req.body.appId }, function (err, clientApp) {
     if (err) return res.status(500).send('Error on the server.');
     if (!clientApp) return res.status(404).send('No user found.');

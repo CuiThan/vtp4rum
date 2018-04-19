@@ -206,9 +206,9 @@ router.post('/post_topic',VerifyToken, function(req, res) {
     var  curentUser = new Object();
     curentUser.uid = 1;
 
-    if (req.body.cid == undefined)
+    if (req.body.tid == undefined)
     {
-        res.status(200).send('GroupId is required!!!');
+        res.status(200).send('TopicId is required!!!');
         return;
     }
     if (req.body.content == undefined)
