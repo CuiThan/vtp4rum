@@ -9,7 +9,7 @@ class Post {
         this.deleted = obj.deleted;
         this.votes = obj.votes;
         this.timestamp = obj.timestamp;
-        this.tid = obj.tid;
+        this.tid = parseInt(obj.tid);
         this.content = obj.content;
         this.pid = obj.pid;
         this.edited = obj.edited;
