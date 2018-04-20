@@ -14,7 +14,7 @@ class Post {
         this.pid = obj.pid;
         this.edited = obj.edited;
         this.uid = obj.uid;
-        this.votes = obj.upvotes;
+        this.liked = obj.upvotes;
         this.timestampISO = obj.timestampISO;
         this.editedISO = obj.editedISO;
         this.index = obj.index;

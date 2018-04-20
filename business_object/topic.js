@@ -22,7 +22,7 @@ class Topic {
         this.cid = obj.cid;
         this.uid = obj.uid;
         this.postcount = obj.postcount;
-        this.votes = obj.upvotes;
+        this.liked = obj.upvotes
         this.titleRaw = obj.titleRaw;
         this.timestampISO = obj.timestampISO;
         this.lastposttimeISO = obj.lastposttimeISO;

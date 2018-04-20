@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="81d427d3-bdaa-4c25-8435-b9fbf1707f80" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/business_object/post.js" beforeDir="false" afterPath="$PROJECT_DIR$/business_object/post.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_object/topic.js" beforeDir="false" afterPath="$PROJECT_DIR$/business_object/topic.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,7 +44,7 @@
       <file leaf-file-name="APIController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/4rum_api/APIController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
+            <state relative-caret-position="741">
               <caret line="135" column="32" selection-start-line="135" selection-start-column="32" selection-end-line="135" selection-end-column="32" />
               <folding>
                 <element signature="e#783#1558#0" />
@@ -66,8 +67,8 @@
       <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/business_object/post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="37" lean-forward="true" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+            <state relative-caret-position="272">
+              <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -136,11 +137,11 @@
         <option value="$PROJECT_DIR$/business_object/user.js" />
         <option value="$PROJECT_DIR$/business_object/pagination.js" />
         <option value="$PROJECT_DIR$/business_object/group.js" />
-        <option value="$PROJECT_DIR$/business_object/topic.js" />
         <option value="$PROJECT_DIR$/auth/VerifyToken.js" />
         <option value="$PROJECT_DIR$/common/Setting.js" />
         <option value="$PROJECT_DIR$/auth/AuthController.js" />
         <option value="$PROJECT_DIR$/4rum_api/APIController.js" />
+        <option value="$PROJECT_DIR$/business_object/topic.js" />
         <option value="$PROJECT_DIR$/business_object/post.js" />
       </list>
     </option>
@@ -297,12 +298,12 @@
       <workItem from="1523944910252" duration="39775000" />
       <workItem from="1524115644530" duration="987000" />
       <workItem from="1524116775148" duration="50000" />
-      <workItem from="1524116843856" duration="11405000" />
+      <workItem from="1524116843856" duration="12754000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72227000" />
+    <option name="totallyTimeSpent" value="73576000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="2064" height="1128" extended-state="6" />
@@ -346,7 +347,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="69" />
+      <option name="time" value="70" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="NodeJSConfigurationType">
@@ -713,7 +714,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/4rum_api/APIController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
+        <state relative-caret-position="741">
           <caret line="135" column="32" selection-start-line="135" selection-start-column="32" selection-end-line="135" selection-end-column="32" />
           <folding>
             <element signature="e#783#1558#0" />
@@ -732,8 +733,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/business_object/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="37" lean-forward="true" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+        <state relative-caret-position="272">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
         </state>
       </provider>
     </entry>
