@@ -1,5 +1,5 @@
 module.exports = {
-    BASE_URL            : 'http://localhost:4567/api',
+    BASE_URL            : 'http://125.212.238.119:4567/api',
     BEARER_TOKEN        : 'Bearer b7934739-f66a-4527-b0ba-2156bf16f044',
     GET_GROUP           : '/categories',
     GROUP_POST          : '/category/',

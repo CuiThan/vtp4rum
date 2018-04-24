@@ -149,164 +149,14 @@ router.post('/get_topic',VerifyToken, function(req, res) {
 });
 
 router.post('/create_topic',VerifyToken, function(req, res) {
-    //var curentUser = getUserByEmail(req.body.email);
-    var  curentUser = new Object();
-    curentUser.uid = 1;
-
-    if (req.body.cid == undefined)
+    if (req.body.email == undefined)
     {
-        res.status(200).send('GroupId is required!!!');
-        return;
-    }
-    if (req.body.title == undefined)
-    {
-        res.status(200).send('Topic Title is required!!!');
-        return;
-    }
-    if (req.body.content == undefined)
-    {
-        res.status(200).send('Topic content is required!!!');
+        res.status(200).send('Email is required!!!');
         return;
     }
 
-    var jsonBody = {
-        _uid: curentUser.uid,
-        cid : req.body.cid,
-        title : req.body.title,
-        content : req.body.content,
-    };
-
-    requestPromise({
-        url: Setting.BASE_URL + Setting.CREATE_TOPIC,
-        method: "POST",
-        headers: {
-            'User-Agent': 'Request-Promise',
-            'Authorization' : Setting.BEARER_TOKEN
-        },
-        json: true,   // <--Very important!!!
-        body: jsonBody
-        })
-        .then(function (repos) {
-            res.status(200).send(repos);
-        })
-        .catch(function (err) {
-            var errMsg = new Object();
-            errMsg.name = err.name;
-            errMsg.statusCode = err.statusCode;
-            errMsg.message = err.message;
-            errMsg.error = err.error;
-
-            res.status(200).send(errMsg);
-    });
-
-});
-
-router.post('/post_topic',VerifyToken, function(req, res) {
-    //var curentUser = getUserByEmail(req.body.email);
-    var  curentUser = new Object();
-    curentUser.uid = 1;
-
-    if (req.body.tid == undefined)
-    {
-        res.status(200).send('TopicId is required!!!');
-        return;
-    }
-    if (req.body.content == undefined)
-    {
-        res.status(200).send('Topic content is required!!!');
-        return;
-    }
-
-    var jsonBody = {};
-
-    if (req.body.toPid != undefined)
-    {
-        jsonBody = {
-            _uid: curentUser.uid,
-            content : req.body.content,
-        };
-    }
-    else {
-        jsonBody = {
-            _uid: curentUser.uid,
-            toPid : req.body.toPid,
-            content : req.body.content,
-        };
-    };
-
-    requestPromise({
-        url: Setting.BASE_URL + Setting.CREATE_TOPIC + req.body.tid,
-        method: "POST",
-        headers: {
-            'User-Agent': 'Request-Promise',
-            'Authorization' : Setting.BEARER_TOKEN
-        },
-        json: true,   // <--Very important!!!
-        body: jsonBody
-    })
-        .then(function (repos) {
-            res.status(200).send(repos);
-        })
-        .catch(function (err) {
-            var errMsg = new Object();
-            errMsg.name = err.name;
-            errMsg.statusCode = err.statusCode;
-            errMsg.message = err.message;
-            errMsg.error = err.error;
-
-            res.status(200).send(errMsg);
-        });
-
-});
-
-router.post('/like',VerifyToken, function(req, res) {
-    //var curentUser = getUserByEmail(req.body.email);
-    var  curentUser = new Object();
-    curentUser.uid = 2;
-
-    if (req.body.pid == undefined)
-    {
-        res.status(200).send('PostId is required!!!');
-        return;
-    }
-    if (req.body.delta == undefined)
-    {
-        res.status(200).send('Deltat is required!!!');
-        return;
-    }
-    var  jsonBody = {
-        _uid: curentUser.uid,
-        delta : req.body.delta,
-    };
-
-    requestPromise({
-        url: Setting.BASE_URL + Setting.POST + req.body.pid + '/vote',
-        method: "POST",
-        headers: {
-            'User-Agent': 'Request-Promise',
-            'Authorization' : Setting.BEARER_TOKEN
-        },
-        json: true,   // <--Very important!!!
-        body: jsonBody
-    })
-        .then(function (repos) {
-            res.status(200).send(repos);
-        })
-        .catch(function (err) {
-            var errMsg = new Object();
-            errMsg.name = err.name;
-            errMsg.statusCode = err.statusCode;
-            errMsg.message = err.message;
-            errMsg.error = err.error;
-
-            res.status(200).send(errMsg);
-        });
-
-});
-
-function getUserByEmail(email){
     var options = {
-        uri: Setting.BASE_URL + Setting.GET_USER + email,
+        uri: Setting.BASE_URL + Setting.GET_USER + req.body.email,
         headers: {
             'User-Agent': 'Request-Promise',
             'Authorization' : Setting.BEARER_TOKEN
@@ -319,11 +169,207 @@ function getUserByEmail(email){
 
     requestPromise(options)
         .then(function (repos) {
-            return repos;
+            var curentUser = new Object();
+            curentUser.uid = repos.uid;
+
+            if (req.body.cid == undefined)
+            {
+                res.status(200).send('GroupId is required!!!');
+                return;
+            }
+            if (req.body.title == undefined)
+            {
+                res.status(200).send('Topic Title is required!!!');
+                return;
+            }
+            if (req.body.content == undefined)
+            {
+                res.status(200).send('Topic content is required!!!');
+                return;
+            }
+
+            var jsonBody = {
+                _uid: curentUser.uid,
+                cid : req.body.cid,
+                title : req.body.title,
+                content : req.body.content,
+            };
+
+            requestPromise({
+                url: Setting.BASE_URL + Setting.CREATE_TOPIC,
+                method: "POST",
+                headers: {
+                    'User-Agent': 'Request-Promise',
+                    'Authorization' : Setting.BEARER_TOKEN
+                },
+                json: true,   // <--Very important!!!
+                body: jsonBody
+            })
+                .then(function (repos) {
+                    res.status(200).send(repos);
+                })
+                .catch(function (err) {
+                    var errMsg = new Object();
+                    errMsg.name = err.name;
+                    errMsg.statusCode = err.statusCode;
+                    errMsg.message = err.message;
+                    errMsg.error = err.error;
+
+                    res.status(200).send(errMsg);
+                });
         })
         .catch(function (err) {
             return err;
         });
+});
+
+router.post('/post_topic',VerifyToken, function(req, res) {
+    if (req.body.email == undefined)
+    {
+        res.status(200).send('Email is required!!!');
+        return;
+    }
+
+    var options = {
+        uri: Setting.BASE_URL + Setting.GET_USER + req.body.email,
+        headers: {
+            'User-Agent': 'Request-Promise',
+            'Authorization' : Setting.BEARER_TOKEN
+        },
+        body : {
+            '_uid' : 1,
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    requestPromise(options)
+        .then(function (repos) {
+            var  curentUser = new Object();
+            curentUser.uid = repos.uid;
+
+            if (req.body.tid == undefined)
+            {
+                res.status(200).send('TopicId is required!!!');
+                return;
+            }
+            if (req.body.content == undefined)
+            {
+                res.status(200).send('Topic content is required!!!');
+                return;
+            }
+
+            var jsonBody = {};
+
+            if (req.body.toPid != undefined)
+            {
+                jsonBody = {
+                    _uid: curentUser.uid,
+                    content : req.body.content,
+                };
+            }
+            else {
+                jsonBody = {
+                    _uid: curentUser.uid,
+                    toPid : req.body.toPid,
+                    content : req.body.content,
+                };
+            };
+
+            requestPromise({
+                url: Setting.BASE_URL + Setting.CREATE_TOPIC + req.body.tid,
+                method: "POST",
+                headers: {
+                    'User-Agent': 'Request-Promise',
+                    'Authorization' : Setting.BEARER_TOKEN
+                },
+                json: true,   // <--Very important!!!
+                body: jsonBody
+            })
+                .then(function (repos) {
+                    res.status(200).send(repos);
+                })
+                .catch(function (err) {
+                    var errMsg = new Object();
+                    errMsg.name = err.name;
+                    errMsg.statusCode = err.statusCode;
+                    errMsg.message = err.message;
+                    errMsg.error = err.error;
+
+                    res.status(200).send(errMsg);
+                });
+        }).catch(function (err) {
+            return err;
+        });
+});
+
+router.post('/like',VerifyToken, function(req, res) {
+    if (req.body.email == undefined)
+    {
+        res.status(200).send('Email is required!!!');
+        return;
+    }
+
+    var options = {
+        uri: Setting.BASE_URL + Setting.GET_USER + req.body.email,
+        headers: {
+            'User-Agent': 'Request-Promise',
+            'Authorization' : Setting.BEARER_TOKEN
+        },
+        body : {
+            '_uid' : 1,
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    requestPromise(options)
+        .then(function (repos) {
+            var  curentUser = new Object();
+            curentUser.uid = repos.uid;
+
+            if (req.body.pid == undefined)
+            {
+                res.status(200).send('PostId is required!!!');
+                return;
+            }
+            if (req.body.delta == undefined)
+            {
+                res.status(200).send('Delta is required!!!');
+                return;
+            }
+            var  jsonBody = {
+                _uid: curentUser.uid,
+                delta : req.body.delta,
+            };
+
+            requestPromise({
+                url: Setting.BASE_URL + Setting.POST + req.body.pid + '/vote',
+                method: "POST",
+                headers: {
+                    'User-Agent': 'Request-Promise',
+                    'Authorization' : Setting.BEARER_TOKEN
+                },
+                json: true,   // <--Very important!!!
+                body: jsonBody
+            })
+                .then(function (repos) {
+                    res.status(200).send(repos);
+                })
+                .catch(function (err) {
+                    var errMsg = new Object();
+                    errMsg.name = err.name;
+                    errMsg.statusCode = err.statusCode;
+                    errMsg.message = err.message;
+                    errMsg.error = err.error;
+
+                    res.status(200).send(errMsg);
+                });
+        }).catch(function (err) {
+            return err;
+        });
+
+});
+
+function getUserByEmail(res){
 };
 
 module.exports = router;
