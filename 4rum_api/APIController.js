@@ -219,7 +219,34 @@ router.post('/create_topic',VerifyToken, function(req, res) {
                 });
         })
         .catch(function (err) {
-            return err;
+            if (err.statusCode == 404){
+                //khong tim thấy acc -> tạo acc
+                var jsonBody = {
+                    _uid: 1,
+                    username : req.body.email.replace(/@[^@]+$/, ''),
+                    password : req.body.email,
+                    email : req.body.email
+                }
+                requestPromise({
+                    url: Setting.FORUM_CREATE_USER_URL,
+                    method: "POST",
+                    headers: {
+                        'User-Agent': 'Request-Promise',
+                        'Authorization' : Setting.FORUM_TOKEN
+                    },
+                    json: true,   // <--Very important!!!
+                    body: jsonBody
+                })
+                    .then(function (repos) {
+                    })
+                    .catch(function (err) {
+                        var errMsg = new Object();
+                        errMsg.name = err.name;
+                        errMsg.statusCode = err.statusCode;
+                        errMsg.message = err.message;
+                        errMsg.error = err.error;
+                    });
+            };
         });
 });
 
@@ -369,7 +396,5 @@ router.post('/like',VerifyToken, function(req, res) {
 
 });
 
-function getUserByEmail(res){
-};
 
 module.exports = router;
