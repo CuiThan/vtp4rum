@@ -14,7 +14,7 @@ var create4rumAccount = function (req, callback, orgRes) {
         email : req.body.email
     }
     requestPromise({
-        url: Setting.FORUM_CREATE_USER_URL,
+        url: Setting.BASE_URL + Setting.FORUM_CREATE_USER_URL,
         method: "POST",
         headers: {
             'User-Agent': 'Request-Promise',
@@ -23,7 +23,9 @@ var create4rumAccount = function (req, callback, orgRes) {
         json: true,   // <--Very important!!!
         body: jsonBody
     }).then(function (repos) {
-        callback(req,repos.uid, orgRes);
+        if (repos.code == 'ok') {
+            callback(req, repos.payload.uid, orgRes);
+        }
     }).catch(function (err) {
         var errMsg = new Object();
         errMsg.name = err.name;
@@ -104,10 +106,101 @@ var createTopic = function (req, uid, orgRes) {
 
 };
 
+var postTopic = function (req, uid, orgRes) {
+    if (req.body.tid == undefined)
+    {
+        res.status(200).send('TopicId is required!!!');
+        return;
+    }
+    if (req.body.content == undefined)
+    {
+        res.status(200).send('Topic content is required!!!');
+        return;
+    }
+
+    var jsonBody = {};
+
+    if (req.body.toPid != undefined)
+    {
+        jsonBody = {
+            _uid: curentUser.uid,
+            content : req.body.content,
+        };
+    }
+    else {
+        jsonBody = {
+            _uid: uid,
+            toPid : req.body.toPid,
+            content : req.body.content,
+        };
+    };
+
+    requestPromise({
+        url: Setting.BASE_URL + Setting.CREATE_TOPIC + req.body.tid,
+        method: "POST",
+        headers: {
+            'User-Agent': 'Request-Promise',
+            'Authorization' : Setting.BEARER_TOKEN
+        },
+        json: true,   // <--Very important!!!
+        body: jsonBody
+    }).then(function (repos) {
+        orgRes.status(200).send(repos);
+    }).catch(function (err) {
+        var errMsg = new Object();
+        errMsg.name = err.name;
+        errMsg.statusCode = err.statusCode;
+        errMsg.message = err.message;
+        errMsg.error = err.error;
+
+        orgRes.status(200).send(errMsg);
+    });
+};
+
+var topicLike = function (req, uid, orgRes) {
+    if (req.body.pid == undefined)
+    {
+        res.status(200).send('PostId is required!!!');
+        return;
+    }
+    if (req.body.delta == undefined)
+    {
+        res.status(200).send('Delta is required!!!');
+        return;
+    }
+    var  jsonBody = {
+        _uid: uid,
+        delta : req.body.delta,
+    };
+
+    requestPromise({
+        url: Setting.BASE_URL + Setting.POST + req.body.pid + '/vote',
+        method: "POST",
+        headers: {
+            'User-Agent': 'Request-Promise',
+            'Authorization' : Setting.BEARER_TOKEN
+        },
+        json: true,   // <--Very important!!!
+        body: jsonBody
+    }).then(function (repos) {
+        orgRes.status(200).send(repos);
+    }).catch(function (err) {
+        var errMsg = new Object();
+        errMsg.name = err.name;
+        errMsg.statusCode = err.statusCode;
+        errMsg.message = err.message;
+        errMsg.error = err.error;
+
+        orgRes.status(200).send(errMsg);
+    });
+};
+
 var VTP4rumCommonAPI = {
     create4rumAccount : create4rumAccount,
     getUserByEmail : getUserByEmail,
-    createTopic: createTopic,
+    createTopic : createTopic,
+    postTopic : postTopic,
+    topicLike : topicLike
 };
 
 module.exports = VTP4rumCommonAPI;
