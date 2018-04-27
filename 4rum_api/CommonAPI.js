@@ -120,10 +120,10 @@ var postTopic = function (req, uid, orgRes) {
 
     var jsonBody = {};
 
-    if (req.body.toPid != undefined)
+    if (req.body.toPid == undefined)
     {
         jsonBody = {
-            _uid: curentUser.uid,
+            _uid: uid,
             content : req.body.content,
         };
     }
