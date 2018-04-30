@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/securing-restful-apis-with-jwt.iml" filepath="$PROJECT_DIR$/.idea/securing-restful-apis-with-jwt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/vtp4rum.iml" filepath="$PROJECT_DIR$/.idea/vtp4rum.iml" />
     </modules>
   </component>
 </project>
